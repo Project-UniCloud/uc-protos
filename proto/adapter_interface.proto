@@ -4,6 +4,7 @@ package adapter;
 
 service CloudAdapter {
   rpc GetStatus(StatusRequest) returns (StatusResponse);
+  rpc CreateUser(CreateUserRequest) returns (UserCreatedResponse);
 }
 
 message StatusRequest {
@@ -12,4 +13,12 @@ message StatusRequest {
 
 message StatusResponse {
   bool isHealthy = 1;
+}
+
+message CreateUserRequest {
+
+}
+
+message UserCreatedResponse {
+  string id = 1;
 }
