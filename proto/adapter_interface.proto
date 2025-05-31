@@ -4,21 +4,31 @@ package adapter;
 
 service CloudAdapter {
   rpc GetStatus(StatusRequest) returns (StatusResponse);
-  rpc CreateUser(CreateUserRequest) returns (UserCreatedResponse);
+  rpc CreateGroupWithLeaders(CreateGroupWithLeadersRequest) returns (GroupCreatedResponse);
+  rpc CreateUsersForGroup(CreateUsersForGroupRequest) returns (CreateUsersForGroupResponse);
 }
 
-message StatusRequest {
-
-}
+message StatusRequest {}
 
 message StatusResponse {
   bool isHealthy = 1;
 }
 
-message CreateUserRequest {
-
+message CreateUsersForGroupRequest {
+  repeated string users = 1;
+  string groupName = 2;
 }
 
-message UserCreatedResponse {
-  string id = 1;
+message CreateUsersForGroupResponse {
+  string message = 1;
+}
+
+message CreateGroupWithLeadersRequest {
+  string resourceType = 1;
+  repeated string leaders = 2;
+  string groupName = 3;
+}
+
+message GroupCreatedResponse {
+  string groupName = 1;
 }
