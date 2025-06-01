@@ -6,6 +6,7 @@ service CloudAdapter {
   rpc GetStatus(StatusRequest) returns (StatusResponse);
   rpc CreateGroupWithLeaders(CreateGroupWithLeadersRequest) returns (GroupCreatedResponse);
   rpc CreateUsersForGroup(CreateUsersForGroupRequest) returns (CreateUsersForGroupResponse);
+  rpc GroupExists(GroupExistsRequest) returns (GroupExistsResponse);
 }
 
 message StatusRequest {}
@@ -31,4 +32,12 @@ message CreateGroupWithLeadersRequest {
 
 message GroupCreatedResponse {
   string groupName = 1;
+}
+
+message GroupExistsRequest {
+  string groupName = 1;
+}
+
+message GroupExistsResponse {
+  bool exists = 1;
 }
