@@ -7,6 +7,9 @@ service CloudAdapter {
   rpc CreateGroupWithLeaders(CreateGroupWithLeadersRequest) returns (GroupCreatedResponse);
   rpc CreateUsersForGroup(CreateUsersForGroupRequest) returns (CreateUsersForGroupResponse);
   rpc GroupExists(GroupExistsRequest) returns (GroupExistsResponse);
+  rpc GetTotalCostForGroup(CostRequest) returns (CostResponse);
+  rpc GetTotalCostsForAllGroups(CostRequest) returns (AllGroupsCostResponse);
+  rpc GetTotalAwsCost(CostRequest) returns (CostResponse);
 }
 
 message StatusRequest {}
@@ -40,4 +43,23 @@ message GroupExistsRequest {
 
 message GroupExistsResponse {
   bool exists = 1;
+}
+
+message CostRequest {
+  string startDate = 1;
+  string endDate = 2;
+  string groupName = 3;
+}
+
+message CostResponse {
+  double amount = 1;
+}
+
+message GroupCost {
+  string groupName = 1;
+  double amount = 2;
+}
+
+message AllGroupsCostResponse {
+  repeated GroupCost groupCosts = 1;
 }
