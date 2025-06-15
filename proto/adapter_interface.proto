@@ -9,7 +9,7 @@ service CloudAdapter {
   rpc GroupExists(GroupExistsRequest) returns (GroupExistsResponse);
   rpc GetTotalCostForGroup(CostRequest) returns (CostResponse);
   rpc GetTotalCostsForAllGroups(CostRequest) returns (AllGroupsCostResponse);
-  rpc GetTotalAwsCost(CostRequest) returns (CostResponse);
+  rpc GetTotalCost(CostRequest) returns (CostResponse);
 }
 
 message StatusRequest {}
