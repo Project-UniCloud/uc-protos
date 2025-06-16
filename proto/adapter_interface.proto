@@ -10,6 +10,7 @@ service CloudAdapter {
   rpc GetTotalCostForGroup(CostRequest) returns (CostResponse);
   rpc GetTotalCostsForAllGroups(CostRequest) returns (AllGroupsCostResponse);
   rpc GetTotalCost(CostRequest) returns (CostResponse);
+  rpc GetGroupCostWithServiceBreakdown(GroupServiceBreakdownRequest) returns (GroupServiceBreakdownResponse); // ✅ Nowa metoda
 }
 
 message StatusRequest {}
@@ -62,4 +63,20 @@ message GroupCost {
 
 message AllGroupsCostResponse {
   repeated GroupCost groupCosts = 1;
+}
+
+message GroupServiceBreakdownRequest {
+  string groupName = 1;
+  string startDate = 2;
+  string endDate = 3;
+}
+
+message ServiceCost {
+  string serviceName = 1;
+  double amount = 2;
+}
+
+message GroupServiceBreakdownResponse {
+  double total = 1;
+  repeated ServiceCost breakdown = 2;
 }
