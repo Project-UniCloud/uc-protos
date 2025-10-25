@@ -12,6 +12,7 @@ service CloudAdapter {
   rpc GetTotalCostsForAllGroups(CostRequest) returns (AllGroupsCostResponse);
   rpc GetTotalCost(CostRequest) returns (CostResponse);
   rpc GetGroupCostWithServiceBreakdown(GroupServiceBreakdownRequest) returns (GroupServiceBreakdownResponse);
+  rpc CleanupGroupResources(CleanupGroupRequest) returns (CleanupGroupResponse);
 }
 
 // === Health Check ===
@@ -84,4 +85,16 @@ message ServiceCost {
 message GroupServiceBreakdownResponse {
   double total = 1;
   repeated ServiceCost breakdown = 2;
+}
+
+// === Resource Cleanup ===
+message CleanupGroupRequest {
+  string groupName = 1;
+  bool force = 2;
+}
+
+message CleanupGroupResponse {
+  bool success = 1;
+  repeated string deletedResources = 2;
+  string message = 3;
 }
