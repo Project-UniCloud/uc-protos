@@ -13,6 +13,8 @@ service CloudAdapter {
   rpc GetTotalCost(CostRequest) returns (CostResponse);
   rpc GetGroupCostWithServiceBreakdown(GroupServiceBreakdownRequest) returns (GroupServiceBreakdownResponse);
   rpc GetResourceCount(ResourceCountRequest) returns (ResourceCountResponse);
+  // Koszty dla grupy z ostatnich 6 miesięcy w podziale na typy zasobów (mapa skrót_typu -> koszt)
+  rpc GetGroupCostsLast6MonthsByService(GroupLast6MonthsCostRequest) returns (GroupCostMapResponse);
   rpc CleanupGroupResources(CleanupGroupRequest) returns (CleanupGroupResponse);
   rpc RemoveGroup(RemoveGroupRequest) returns (RemoveGroupResponse);
 }
@@ -87,6 +89,15 @@ message ServiceCost {
 message GroupServiceBreakdownResponse {
   double total = 1;
   repeated ServiceCost breakdown = 2;
+}
+
+// === 6-miesięczne koszty w formie mapy ===
+message GroupLast6MonthsCostRequest {
+  string groupName = 1;
+}
+
+message GroupCostMapResponse {
+  map<string, double> costs = 1; // np. {"ec2": 1002.23, "s3": 13.30}
 }
 
 // === Resource counting ===
