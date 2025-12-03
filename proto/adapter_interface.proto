@@ -15,6 +15,8 @@ service CloudAdapter {
   rpc GetResourceCount(ResourceCountRequest) returns (ResourceCountResponse);
   // Koszty dla grupy z ostatnich 6 miesięcy w podziale na typy zasobów (mapa skrót_typu -> koszt)
   rpc GetGroupCostsLast6MonthsByService(GroupLast6MonthsCostRequest) returns (GroupCostMapResponse);
+  // Całkowite koszty dla grupy w ujęciu miesięcznym z ostatnich 6 miesięcy (mapa YYYY-MM -> koszt)
+  rpc GetGroupMonthlyCostsLast6Months(GroupLast6MonthsCostRequest) returns (GroupMonthlyCostsResponse);
   rpc CleanupGroupResources(CleanupGroupRequest) returns (CleanupGroupResponse);
   rpc RemoveGroup(RemoveGroupRequest) returns (RemoveGroupResponse);
 }
@@ -98,6 +100,13 @@ message GroupLast6MonthsCostRequest {
 
 message GroupCostMapResponse {
   map<string, double> costs = 1; // np. {"ec2": 1002.23, "s3": 13.30}
+}
+
+// === 6-miesięczne koszty całkowite miesiąc-po-miesiącu ===
+message GroupMonthlyCostsResponse {
+  // Klucze w formacie dd-MM-yyyy (zawsze pierwszy dzień miesiąca, np. "01-07-2025").
+  // Zawsze 6 pozycji, łącznie z bieżącym miesiącem (UTC).
+  map<string, double> monthCosts = 1;
 }
 
 // === Resource counting ===
