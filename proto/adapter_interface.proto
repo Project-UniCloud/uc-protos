@@ -19,6 +19,8 @@ service CloudAdapter {
   rpc GetGroupMonthlyCostsLast6Months(GroupLast6MonthsCostRequest) returns (GroupMonthlyCostsResponse);
   rpc CleanupGroupResources(CleanupGroupRequest) returns (CleanupGroupResponse);
   rpc RemoveGroup(RemoveGroupRequest) returns (RemoveGroupResponse);
+  // Lista obsługiwanych typów zasobów, np. ["ec2", "s3"].
+  rpc GetSupportedResourceTypes(SupportedResourceTypesRequest) returns (SupportedResourceTypesResponse);
 }
 
 // === Health Check ===
@@ -140,4 +142,11 @@ message RemoveGroupResponse {
   bool success = 1;
   repeated string removedUsers = 2;
   string message = 3;
+}
+
+// === Supported resource types ===
+message SupportedResourceTypesRequest {}
+
+message SupportedResourceTypesResponse {
+  repeated string resourceTypes = 1; // np. ["ec2", "s3", "iam"]
 }
