@@ -30,7 +30,7 @@ message StatusResponse {
 
 // === Group Management ===
 message CreateGroupWithLeadersRequest {
-  string resourceType = 1;
+  repeated string resourceTypes = 1;
   repeated string leaders = 2;
   string groupName = 3;
 }
