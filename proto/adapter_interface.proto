@@ -18,6 +18,7 @@ service CloudAdapter {
   rpc CleanupGroupResources(CleanupGroupRequest) returns (CleanupGroupResponse);
   rpc RemoveGroup(RemoveGroupRequest) returns (RemoveGroupResponse);
   rpc GetAvailableServices(GetAvailableServicesRequest) returns (GetAvailableServicesResponse);
+  rpc AssignPolicies(AssignPoliciesRequest) returns (AssignPoliciesResponse);
 }
 
 // === Health Check ===
@@ -25,6 +26,17 @@ message StatusRequest {}
 
 message StatusResponse {
   bool isHealthy = 1;
+}
+
+message AssignPoliciesRequest {
+  repeated string resourceTypes = 1; // np. ["s3", "dynamodb"]
+  string groupName = 2;              // Opcjonalne (jeśli dla studentów)
+  string userName = 3;               // Opcjonalne (jeśli dla leadera)
+}
+
+message AssignPoliciesResponse {
+  bool success = 1;
+  string message = 2;
 }
 
 // === Group Management ===
