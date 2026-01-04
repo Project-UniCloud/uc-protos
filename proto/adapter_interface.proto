@@ -19,6 +19,7 @@ service CloudAdapter {
   rpc RemoveGroup(RemoveGroupRequest) returns (RemoveGroupResponse);
   rpc GetAvailableServices(GetAvailableServicesRequest) returns (GetAvailableServicesResponse);
   rpc AssignPolicies(AssignPoliciesRequest) returns (AssignPoliciesResponse);
+  rpc DeleteResource(DeleteResourceRequest) returns (DeleteResourceResponse);
 }
 
 // === Health Check ===
@@ -150,4 +151,13 @@ message GetAvailableServicesRequest {}
 
 message GetAvailableServicesResponse {
   repeated string services = 1;
+}
+
+message DeleteResourceRequest {
+  string resource_arn = 1;
+}
+
+message DeleteResourceResponse {
+  bool success = 1;
+  string message = 2;
 }
