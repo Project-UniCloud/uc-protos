@@ -22,6 +22,7 @@ service CloudAdapter {
   rpc DeleteResource(DeleteResourceRequest) returns (DeleteResourceResponse);
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
   rpc AddLeaderToGroup (AddLeaderToGroupRequest) returns (AddLeaderToGroupResponse);
+  rpc GetGroupResourcesList (GetGroupResourcesListRequest) returns (GetGroupResourcesListResponse);
 }
 
 // === Health Check ===
@@ -181,4 +182,23 @@ message AddLeaderToGroupRequest {
 message AddLeaderToGroupResponse {
     bool success = 1;
     string message = 2;
+}
+
+message GetGroupResourcesListRequest {
+    string groupName = 1;
+}
+
+message ResourceDetail {
+    string arn = 1;
+    string name = 2;        // Z tagu 'Name'
+    string type = 3;        // np. EC2 Instance, S3 Bucket
+    string service = 4;     // np. ec2, s3
+    string created_by = 5;  // Z tagu 'CreatedBy'/'User'
+    string resource_id = 6; // Krótkie ID (np. i-12345)
+}
+
+message GetGroupResourcesListResponse {
+    bool success = 1;
+    repeated ResourceDetail resources = 2;
+    string message = 3;
 }
