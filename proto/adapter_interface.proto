@@ -136,7 +136,7 @@ message GetGroupResourcesListRequest {
 }
 
 message ResourceDetail {
-    string arn = 1;
+    string resource_global_id = 1;
     string name = 2;        // From 'Name' tag
     string type = 3;        // e.g. EC2 Instance, S3 Bucket
     string service = 4;     // e.g. ec2, s3
@@ -160,7 +160,7 @@ message ResourceCountResponse {
 }
 
 message DeleteResourceRequest {
-  string resource_arn = 1;
+  string resource_global_id = 1;
 }
 
 message DeleteResourceResponse {
