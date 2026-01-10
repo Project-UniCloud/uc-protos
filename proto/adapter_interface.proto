@@ -142,6 +142,7 @@ message ResourceDetail {
     string service = 4;     // e.g. ec2, s3
     string created_by = 5;  // From 'CreatedBy' or 'User' tag
     string resource_id = 6; // Short ID (e.g. i-12345)
+    string status = 7;      // Provider-specific status (e.g., running, stopped, Active, available)
 }
 
 message GetGroupResourcesListResponse {
